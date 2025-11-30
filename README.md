@@ -59,3 +59,38 @@ set "REACT_APP_API_BASE=http://localhost:4000/api/v1"; npm run start:win
 
 2. Use a Node LTS version that doesn't require the legacy provider (Node 18.x is commonly used with CRA). Use nvm-windows to switch Node versions if needed.
 
+Run with Docker
+--------------
+
+This repository includes a `Dockerfile` and `docker-compose.yml` for running the frontend in a container. The service in `docker-compose.yml` is named `fe` and the compose file maps container port `80` to host port `3000`.
+
+Quick start (build and run):
+
+PowerShell:
+
+```powershell
+cd c:\Users\admin\git\room_booking_fe1
+docker-compose up -d --build
+```
+
+Or use the provided npm helper scripts (these call `docker-compose`):
+
+```powershell
+npm run docker:up
+npm run docker:logs    # follow logs
+```
+
+Notes about API connectivity
+
+- By default the container uses `REACT_APP_API_BASE=http://host.docker.internal:4000/api/v1` (passed via build-arg and environment in `docker-compose.yml`) so the frontend can reach a backend running on the host at port `4000`.
+- If your backend runs on a different host or port, override the environment in `docker-compose.yml` or set the `REACT_APP_API_BASE` build arg before running.
+- The app serves static files from port `80` inside the container and is exposed on `http://localhost:3000` on the host.
+
+Stopping and removing containers:
+
+```powershell
+docker-compose down
+```
+
+If you'd like, I can also add a short `docker` section in `package.json` scripts to mirror the compose commands or add a `README.docker.md` with troubleshooting tips — want that?
+
