@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docker": "docker-compose up -d --build",
+    "docker:up": "docker-compose up -d --build",
     "docker:logs": "docker-compose logs --tail=200 --follow"
   },
   "browserslist": [
