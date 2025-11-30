@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  fe:
+    build:
+      context: .
+      args:
+        - REACT_APP_API_BASE=http://host.docker.internal:4000/api/v1
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_BASE=http://host.docker.internal:4000/api/v1
+    restart: unless-stopped
