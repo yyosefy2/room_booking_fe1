@@ -8,7 +8,7 @@ RUN npm ci --silent
 
 # build
 COPY . .
-ARG REACT_APP_API_BASE
+ARG REACT_APP_API_BASE=http://localhost:4000/api/v1
 ENV REACT_APP_API_BASE=${REACT_APP_API_BASE}
 RUN npm run build
 

@@ -82,7 +82,8 @@ npm run docker:logs    # follow logs
 
 Notes about API connectivity
 
-- By default the container uses `REACT_APP_API_BASE=http://host.docker.internal:4000/api/v1` (passed via build-arg and environment in `docker-compose.yml`) so the frontend can reach a backend running on the host at port `4000`.
+- By default the container uses `REACT_APP_API_BASE=http://localhost:4000/api/v1` (passed via build-arg and environment in `docker-compose.yml`) so the frontend will attempt to reach `http://localhost:4000` from the container at build/run time.
+- On Docker for Windows and Docker for Mac `localhost` inside the container does not always reference the host; if the container cannot reach your host backend, try using `http://host.docker.internal:4000/api/v1` in `docker-compose.yml` or as a build arg — this is already a common fallback for Docker Desktop.
 - If your backend runs on a different host or port, override the environment in `docker-compose.yml` or set the `REACT_APP_API_BASE` build arg before running.
 - The app serves static files from port `80` inside the container and is exposed on `http://localhost:3000` on the host.
 
