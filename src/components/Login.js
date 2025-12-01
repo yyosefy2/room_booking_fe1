@@ -20,6 +20,7 @@ export default function Login() {
       if (res && res.token) {
         localStorage.setItem('rb_token', res.token);
         if (res.user) localStorage.setItem('rb_user', JSON.stringify(res.user));
+        try { window.dispatchEvent(new Event('rb_auth_changed')); } catch (e) {}
         toast.success('Logged in');
         navigate('/rooms');
       }

@@ -29,6 +29,7 @@ export default function Register() {
       if (res && res.token) {
         localStorage.setItem('rb_token', res.token);
         if (res.user) localStorage.setItem('rb_user', JSON.stringify(res.user));
+        try { window.dispatchEvent(new Event('rb_auth_changed')); } catch (e) {}
         toast.success('Registered and logged in');
         navigate('/rooms');
       }

@@ -13,7 +13,8 @@ function App() {
   useEffect(() => {
     const h = () => setToken(localStorage.getItem('rb_token'));
     window.addEventListener('storage', h);
-    return () => window.removeEventListener('storage', h);
+    window.addEventListener('rb_auth_changed', h);
+    return () => { window.removeEventListener('storage', h); window.removeEventListener('rb_auth_changed', h); };
   }, []);
 
   const navigate = useNavigate();
